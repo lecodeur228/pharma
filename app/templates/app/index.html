@@ -1,0 +1,49 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+
+    <!-- bootstrap.min css -->
+    <link rel="stylesheet" href="{% static 'app/plugins/bootstrap/css/bootstrap.min.css'%}">
+    <!-- Icon Font Css -->
+    <link rel="stylesheet" href="{% static 'app/plugins/icofont/icofont.min.css'%}">
+    <!-- Slick Slider  CSS -->
+    <link rel="stylesheet" href="{% static 'app/plugins/slick-carousel/slick/slick.css' %}">
+    <link rel="stylesheet" href="{% static 'app/plugins/slick-carousel/slick/slick-theme.css' %}">
+  
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+    <title>{% block title %}PHARMA {% endblock %}</title>
+</head>
+<body>
+    
+    {% include 'app/includes/header.html' %}
+    {% block content %}
+    {% endblock %}
+
+    {% include 'app/includes/footer.html' %}
+
+
+    <script src="{% static 'app/plugins/jquery/jquery.js' %}"></script>
+    <!-- Bootstrap 4.3.2 -->
+    <script src="{% static 'app/plugins/bootstrap/js/popper.js' %}"></script>
+    <script src="{% static 'app/plugins/bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'app/plugins/counterup/jquery.easing.js' %}"></script>
+    <!-- Slick Slider -->
+    <script src="{% static 'app/plugins/slick-carousel/slick/slick.min.js' %}"></script>
+    <!-- Counterup -->
+    <script src="{% static 'app/plugins/counterup/jquery.waypoints.min.js' %}"></script>
+    
+    <script src="{ static 'app/plugins/shuffle/shuffle.min.js'}"></script>
+    <script src="{% static 'app/plugins/counterup/jquery.counterup.min.js' %}"></script>
+    <!-- Google Map -->
+    <script src="plugins/google-map/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
+    
+    <script src="{% static 'app/js/script.js' %}"></script>
+    <script src="{% static 'app/js/contact.js' %}"></script>
+</body>
+</html>
