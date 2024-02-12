@@ -1,0 +1,94 @@
+{% extends 'app/index_auth.html' %}
+{% load static %}
+
+{% block auth-title %}Connexion{% endblock %}
+{% block auth-content %}
+
+<div
+class="position-relative overflow-hidden radial-gradient min-vh-100 d-flex align-items-center justify-content-center">
+<div class="d-flex align-items-center justify-content-center w-100">
+    <div class="row justify-content-center w-100">
+        <div class="col-md-10 col-10 col-lg-6 col-12 col-xxl-6 ">
+            <form method="POST" action="{% url 'do_register' %}" >
+                {% csrf_token %}                  
+                <div class="card m-2">
+                    <div class="card-body">
+                        <a href="" class="text-nowrap logo-img text-center d-block">
+                            <img src="{% static 'app/images/logo.png' %}" width="150" height="50" alt="">
+                        </a>
+                        <h2 class="text-center mt-3">Se connecter au compte</h2>
+                        <div class="mb-2">
+                            <label for="exampleInputEmail1" class="form-label">Nom</label>
+                            <input type="text" class="form-control" value="{{ form.firstname.value }}" name="firstname">
+                            {% if form.errors.firstname %}
+                                <h6 class="text text-danger mt-2">{{ form.errors.firstname }}</h6>
+                            {% endif %}
+                        </div>
+                        <div class="mb-2">
+                            <label for="exampleInputEmail1" class="form-label">Prenom</label>
+                            <input type="text" class="form-control" value="{{ form.lastname.value }}" name="lastname" >
+                            {% if form.errors.lastname %}
+                                <h6 class="text text-danger mt-2">{{ form.errors.lastname }}</h6>
+                            {% endif %}
+                        </div>
+                        <div class="mb-2">
+                            <label for="exampleInputEmail1" class="form-label">Télephone :</label>
+                            <input type="tel" class="form-control" name="numero" value="{{ form.numero.value }}" >
+                            {% if form.errors.numero %}
+                                <h6 class="text-danger mt-2">{{ form.errors.numero }}</h6>
+                            {% endif %}
+                        </div>
+                        <div class="mb-2 position-relative">
+                            <label for="exampleInputPassword" class="form-label">Mot de passe :</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="password" id="passwordInput" >
+                                <i class="fa-solid fa-eye text-dark position-absolute" id="togglePassword" style="right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                            </div>
+                            {% if form.errors.password %}
+                                <h6 class="text text-danger mt-2">{{ form.errors.password }}</h6>
+                            {% endif %}
+                        </div>
+                        <div class="mb-2 position-relative">
+                            <label for="exampleInputPassword1" class="form-label">Confirmer le mot de passe :</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control" name="confirm-password" id="confirmPasswordInput" >
+                                <i class="fa-solid fa-eye text-dark position-absolute" id="toggleConfirmPassword" style="right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                            </div>
+                            {% if form.errors.confirm_password %}
+                                <h6 class="text text-danger mt-2">{{ form.errors.confirm_password }}</h6>
+                            {% endif %}
+                        </div>
+                        <div class="mb-2"> 
+                            <input type="checkbox" name="accept_contract" id="acceptContract" >
+                            <label for="acceptContract" class="form-check-label">J'accepte les termes du <a href="#" data-bs-toggle="modal" data-bs-target="#contratModal" class="font-weight-bold">contrat de confidentialité</a></label>
+                        </div>
+                        
+                        <button type="submit" class="btn w-100 py-8 mb-2 rounded-2" style="background-color: #223a66;color: white;">Creer un compte</button>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <p class="mb-0 fw-bold">J'ai déjà un compte?</p>
+                            <a class="fw-bold ms-2" style="color: #223a66" href="{% url 'login'  %}"> Se connecter</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+</div>
+</div>
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const togglePassword2 = document.getElementById('togglePassword2');
+    const passwordInput = document.getElementById('password');
+    const passwordInput2 = document.getElementById('password2');
+
+    togglePassword.addEventListener('click', function () {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      togglePassword.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>';
+    });
+    togglePassword2.addEventListener('click', function () {
+        const type = passwordInput2.getAttribute('type') === 'password' ? 'text' : 'password';
+        togglePassword2.innerHTML = type === 'password' ? '<i class="fa-solid fa-eye"></i>' : '<i class="fa-solid fa-eye-slash"></i>';
+        passwordInput2.setAttribute('type', type);
+    });
+  </script>
+{% endblock%}

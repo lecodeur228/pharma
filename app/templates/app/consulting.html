@@ -1,0 +1,96 @@
+{% extends 'app/index.html' %}
+{% load static %}
+
+{% block title %}Page d'accueil{% endblock %}
+{% block content %}
+
+<section class="page-title bg-1">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="block text-center">
+                    <span class="text-white">PHARMA</span>
+                    <h1 class="text-capitalize mb-5 text-lg">PHARMA CONSULTING</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contact-form-wrap section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="section-title text-center">
+                    <h2 class="text-md mb-2">Formulaire Consultation</h2>
+                    <div class="divider mx-auto my-4"></div>
+                    <p class="mb-5">Expliquez vos soucis de santé ici. Une pharmacie vous enverra un résultat sur le numéro WhatsApp que vous allez entrer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <form method="post" action="{% url 'consultingpost' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-success contact__msg" style="display: none" role="alert">
+                                Your message was sent successfully.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="nomPatient" type="text" class="form-control" placeholder="Votre nom">
+                                {% for error in form.nomPatient.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="poidPaient" type="number" class="form-control" placeholder="Votre poid">
+                                {% for error in form.poidPaient.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="agePatient" type="text" class="form-control" placeholder="Votre âge">
+                                {% for error in form.agePatient.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <input name="numeroWhatsApp" type="tel" class="form-control" placeholder="Votre numéro WhatsApp">
+                                {% for error in form.numeroWhatsApp.errors %}
+                                <small class="text-danger">{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group-2 mb-4">
+                        <textarea name="desciptionProblem" class="form-control" rows="8" placeholder="Expliquez votre souci ici"></textarea>
+                        {% for error in form.desciptionProblem.errors %}
+                        <small class="text-danger">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+
+                    <div class="text-center">
+                        <button class="btn btn-main btn-round-full" type="submit">Soumettre le formulaire</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

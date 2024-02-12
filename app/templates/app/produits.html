@@ -9,8 +9,8 @@
       <div class="row">
         <div class="col-md-12">
           <div class="block text-center">
-            <span class="text-white">Our services</span>
-            <h1 class="text-capitalize mb-5 text-lg">What We Do</h1>
+            <span class="text-white">PHARMA</span>
+            <h1 class="text-capitalize mb-5 text-lg">Produits</h1>
   
             <!-- <ul class="list-inline breadcumb-nav">
               <li class="list-inline-item"><a href="index.html" class="text-white">Home</a></li>
@@ -20,73 +20,46 @@
           </div>
         </div>
       </div>
+      <form action="{% url 'search_produits_page' %}" method="get">
+      <div class="row justify-content-center">
+        
+          <div class="col-md-6  d-flex">
+              <input type="search" class="form-control mx-auto" name="search" value="{{query}}" placeholder="Rechercher...">
+              <button class="btn" style="color: aqua;" type="submit">RECHERCHER</button>
+            </div>
+          </div>
+        </form>
     </div>
   </section>
   
   
   <section class="section service-2">
+    
       <div class="container">
           <div class="row">
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                  <div class="service-block mb-5">
-                      <img src="images/service/service-1.jpg" alt="" class="img-fluid">
-                      <div class="content">
-                          <h4 class="mt-4 mb-2 title-color">Child care</h4>
-                          <p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                      </div>
-                  </div>
-              </div>
-  
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                  <div class="service-block mb-5">
-                      <img src="images/service/service-2.jpg" alt="" class="img-fluid">
-                      <div class="content">
-                          <h4 class="mt-4 mb-2  title-color">Personal Care</h4>
-                          <p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                      </div>
-                  </div>
-              </div>
-              
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                  <div class="service-block mb-5">
-                      <img src="images/service/service-3.jpg" alt="" class="img-fluid">
-                      <div class="content">
-                          <h4 class="mt-4 mb-2 title-color">CT scan</h4>
-                          <p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                      </div>
-                  </div>
-              </div>
-  
-  
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                  <div class="service-block mb-5 mb-lg-0">
-                      <img src="images/service/service-4.jpg" alt="" class="img-fluid">
-                      <div class="content">
-                          <h4 class="mt-4 mb-2 title-color">Joint replacement</h4>
-                          <p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                      </div>
-                  </div>
-              </div>
-  
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                  <div class="service-block mb-5 mb-lg-0">
-                      <img src="images/service/service-6.jpg" alt="" class="img-fluid">
-                      <div class="content">
-                          <h4 class="mt-4 mb-2 title-color">Examination & Diagnosis</h4>
-                          <p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                      </div>
-                  </div>
-              </div>
-              
-              <div class="col-lg-4 col-md-6 col-sm-6">
-                  <div class="service-block mb-5 mb-lg-0">
-                      <img src="images/service/service-8.jpg" alt="" class="img-fluid">
-                      <div class="content">
-                          <h4 class="mt-4 mb-2 title-color">Alzheimer's disease</h4>
-                          <p class="mb-4">Saepe nulla praesentium eaque omnis perferendis a doloremque.</p>
-                      </div>
-                  </div>
-              </div>
+            {% if produits %}
+            {% for produit in produits %}
+            <div class="col-lg-4 col-md-6 col-sm-6">
+               <div class="service-block mb-5">
+                   <img src="{{produit.photoProduit.url}}" alt="" class="img-fluid">
+                   <div class="content">
+                       <h4 class="mt-4 mb-2 title-color">{{ produit.nomProduit }} : {{ produit.prixProduit }} XOF</h4>
+                       <p class="mb-4">{{ produit.descirpion}}</p>
+                      <a href="{% url 'single_produit' produit_id=produit.id %}" class="btn btn-main-2 btn-round-full">Acheter<i class="icofont-simple-right ml-2  "></i></a>
+
+                   </div>
+               </div>
+           </div>
+            {% endfor %}
+           
+            {% else %}
+          <div class="row d-flex justify-content-center ">
+            <div class="alert alert-warning  ">
+              {{ message }}
+            </div>
+            </div>
+          
+            {% endif %}
           </div>
       </div>
   </section>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{% static "app/images/favicon.ico" %}" />
 
     <!-- bootstrap.min css -->
     <link rel="stylesheet" href="{% static 'app/plugins/bootstrap/css/bootstrap.min.css'%}">
@@ -16,6 +16,23 @@
   
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{% static 'app/css/style.css' %}">
+    <style>
+        .counter {
+          display: flex;
+          align-items: center;
+        }
+    
+        .icon {
+          cursor: pointer;
+          padding: 5px 10px;
+          font-size: 16px;
+          background-color: #223a66;
+        }
+    
+        .count {
+          margin: 0 10px;
+        }
+      </style>
     <title>{% block title %}PHARMA {% endblock %}</title>
 </head>
 <body>
@@ -37,11 +54,11 @@
     <!-- Counterup -->
     <script src="{% static 'app/plugins/counterup/jquery.waypoints.min.js' %}"></script>
     
-    <script src="{ static 'app/plugins/shuffle/shuffle.min.js'}"></script>
+    <script src="{% static 'app/plugins/shuffle/shuffle.min.js'%}"> </script>
     <script src="{% static 'app/plugins/counterup/jquery.counterup.min.js' %}"></script>
-    <!-- Google Map -->
+    {% comment %} <!-- Google Map -->
     <script src="plugins/google-map/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>    
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkeLMlsiwzp6b3Gnaxd86lvakimwGA6UA&callback=initMap"></script>     {% endcomment %}
     
     <script src="{% static 'app/js/script.js' %}"></script>
     <script src="{% static 'app/js/contact.js' %}"></script>

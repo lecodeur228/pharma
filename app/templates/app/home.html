@@ -16,7 +16,7 @@
 					
 					<p class="mb-4 pr-5">Une plateforme qui vous permet d'acheter vos produits pharmacetique sans vous déplacer pour allez dans une pharmacie</p>
 					<div class="btn-container ">
-						<a href="appoinment.html" target="_blank" class="btn btn-main-2 btn-icon btn-round-full">Rechercher  un produits <i class="icofont-simple-right ml-2  "></i></a>
+						<a href="{% url 'produits_page' %}" class="btn btn-main-2 btn-icon btn-round-full">Rechercher  un produits <i class="icofont-simple-right ml-2  "></i></a>
 					</div>
 				</div>
 			</div>
@@ -84,8 +84,8 @@
 				<div class="about-content pl-4 mt-4 mt-lg-0">
 					<h2 class="title-color">PHARMA CONSULTING <br></h2>
 					<p class="mt-4 mb-5">Nous vous offrons une mini-consultation en ligne en vous proposant quelques produits pour soulager vos douleurs. Pour une consultation un peu plus complexe, PHARMA vous suggère de vous diriger vers un médecin.</p>
-
-					<a href="service.html" class="btn btn-main-2 btn-round-full btn-icon">CONSULTER<i class="icofont-simple-right ml-3"></i></a>
+					
+					<a href="{% url 'consulting' %}" class="btn btn-main-2 btn-round-full btn-icon">CONSULTER<i class="icofont-simple-right ml-3"></i></a>
 				</div>
 			</div>
 		</div>
@@ -225,7 +225,7 @@
 				<div class="appoinment-content">
 					<img src="{% static 'app/images/about/img-3.jpg' %}" alt="" class="img-fluid">
 					<div class="emergency">
-						<h2 class="text-lg"><i class="icofont-phone-circle text-lg"></i>+23 345 67980</h2>
+						<h2 class="text-lg"><i class="icofont-phone-circle text-lg"></i>+22890000000</h2>
 					</div>
 				</div>
 			</div>
@@ -282,11 +282,25 @@
 	<div class="container">
 		<div class="row align-items-center">
 			<div class="col-lg-12 testimonial-wrap-2">
+				{% if conseils %}
+				{% for conseil in  conseils %}
+				<div class="testimonial-block style-2  gray-bg">
+					<i class="icofont-quote-right"></i>
+
+					<div class="client-info ">
+						<h4>{{ conseil.titreConseil }}</h4>
+						<p>
+							{{conseil.descriptionConseil}}
+						</p>
+					</div>
+				</div>
+				{% endfor %}
+				{% else %}
 				<div class="testimonial-block style-2  gray-bg">
 					<i class="icofont-quote-right"></i>
 
 					<div class="testimonial-thumb">
-						<img src="images/team/test-thumb1.jpg" alt="" class="img-fluid">
+						<img src="{% static "app/images/team/test-thumb1.jpg" %} %}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info ">
@@ -300,7 +314,7 @@
 
 				<div class="testimonial-block style-2  gray-bg">
 					<div class="testimonial-thumb">
-						<img src="images/team/test-thumb2.jpg" alt="" class="img-fluid">
+						<img src="{% static "app/images/team/test-thumb2.jpg" %} %}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info">
@@ -316,7 +330,7 @@
 
 				<div class="testimonial-block style-2  gray-bg">
 					<div class="testimonial-thumb">
-						<img src="images/team/test-thumb3.jpg'" alt="" class="img-fluid">
+						<img src="{% static "app/images/team/test-thumb3.jpg" %} %}" alt="" class="img-fluid">
 					</div>
 
 					<div class="client-info">
@@ -359,6 +373,8 @@
 					</div>
 					<i class="icofont-quote-right"></i>
 				</div>
+				
+				{% endif %}
 			</div>
 		</div>
 	</div>

@@ -1,0 +1,145 @@
+{% extends 'app/index.html' %}
+{% load static %}
+
+{% block title %}Commander produit{% endblock %}
+{% block content %}
+<section class="section department-single">
+    {% for produit in produits %}
+    
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="department-content mt-5">
+					{% comment %} <div class="divider my-4"></div>
+					<p class="lead">Age forming covered you entered the examine. Blessing scarcely confined her contempt wondered shy. Dashwoods contented sportsmen at up no convinced cordially affection.</p>
+					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum recusandae dolor autem laudantium, quaerat vel dignissimos. Magnam sint suscipit omnis eaque unde eos aliquam distinctio, quisquam iste, itaque possimus . Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eveniet alias modi eaque, ratione recusandae cupiditate dolorum repellendus iure eius rerum hic minus ipsa at, corporis nesciunt tempore vero voluptas. Tempore.</p> {% endcomment %}
+
+                    <div class="department-img">
+                    
+                        <img src="{{produit.photoProduit.url}}" alt="" class="img-fluid">
+                        <div class="sidebar-contatct-info mt-4">
+                            <h3>Description : </h3>
+                            <p class="mb-0">{{produit.descirpion}}</p>
+                        </div>
+                    </div>
+				
+
+				</div>
+			</div>
+
+			<div class="col-lg-4">
+                <div class="sidebar-widget schedule-widget mt-5">
+                    <h5 class="mb-4">{{ produit.nomProduit }} : {{ produit.prixProduit }} OXF</h5>
+            
+                    <!-- Formulaire de vente -->
+                    <form method="post" action="{% url 'buy_produit' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="produit_id" value="{{ produit.id }}">
+                        
+                        <div class="form-group">
+                            <label for="name">Votre Nom:</label>
+                            <input name="nomClient" id="name" type="text" class="form-control" placeholder="Votre Nom" required>
+                            {% if form.errors.nomClient %}
+                                <p class="text-danger">{{ form.errors.nomClient }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="phone">Votre Numero:</label>
+                            <input name="phoneClient" id="phone" type="text" class="form-control" placeholder="Votre Numero" required>
+                            {% if form.errors.phoneClient %}
+                                <p class="text-danger">{{ form.errors.phoneClient }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <li class="form-group d-flex justify-content-between align-items-center">
+                            <label for="quantite">Quantité :</label>
+                            <input type="hidden" name="quantite" id="quantiteInput" value="1">
+                            <div class="counter">
+                                <span class="icon decrement" style="color: white;">-</span>
+                                <span class="count" id="quantiteSpan">1</span>
+                                <span class="icon increment" style="color: white;">+</span>
+                            </div>
+                        </li>
+                        {% if form.errors.quantite %}
+                            <p class="text-danger">{{ form.errors.quantite }}</p>
+                        {% endif %}
+                        
+                        <div class="form-group d-flex justify-content-between align-items-center">
+                            <label for="livrer">Être Livrer (facultative):</label>
+                            <input type="checkbox" name="isLivrer" id="livrer">
+                        </div>
+                        
+                        <div class="form-group" id="localisation_field">
+                            <label for="name">Coller le lien de votre localisation :</label>
+                            <input name="localisation" id="localisation" type="text" class="form-control" placeholder="Votre Localisation">
+                            {% if form.errors.localisation %}
+                                <p class="text-danger">{{ form.errors.localisation }}</p>
+                            {% endif %}
+                        </div>
+                        
+                        <button type="submit" class="btn btn-main-2 btn-round-full">Acheter<i class="icofont-simple-right ml-2"></i></button>
+                    </form>
+                    {% if messages %}
+                            {% for message in messages %}
+                                <div class="alert alert-success pt-5 ">
+                                    <p>{{ message }}</p>
+                                </div>
+                            {% endfor %}
+                    {% endif %}
+                                        
+                    <!-- Fin du formulaire de vente -->
+            
+                </div>
+            </div>
+            
+			</div>
+		</div>
+	</div>
+    {% endfor %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var livrerCheckbox = document.getElementById('livrer');
+            var localisationField = document.getElementById('localisation_field');
+    
+            // Masquer le champ de localisation par défaut
+            localisationField.style.display = 'none';
+    
+            // Écouter les changements de la case à cocher
+            livrerCheckbox.addEventListener('change', function() {
+                if (livrerCheckbox.checked) {
+                    localisationField.style.display = 'block';
+                } else {
+                    localisationField.style.display = 'none';
+                }
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            const countElement = document.getElementById('quantiteSpan'); // Sélectionnez le span contenant la quantité
+            const quantiteInput = document.getElementById('quantiteInput'); // Sélectionnez l'input caché de quantité
+            const decrementButton = document.querySelector('.decrement');
+            const incrementButton = document.querySelector('.increment');
+        
+            decrementButton.addEventListener('click', function() {
+                let count = parseInt(countElement.textContent);
+                count = count > 1 ? count - 1 : 1;
+                countElement.textContent = count;
+                quantiteInput.value = count; // Mettez à jour la valeur de l'input caché de quantité
+            });
+        
+            incrementButton.addEventListener('click', function() {
+                let count = parseInt(countElement.textContent);
+                countElement.textContent = count + 1;
+                quantiteInput.value = count + 1; // Mettez à jour la valeur de l'input caché de quantité
+            });
+        });
+        
+      </script>
+</section>
+{% endblock %}
